@@ -1,6 +1,7 @@
 package me.anisjamadar.hotelbooking.services;
 
 import lombok.AllArgsConstructor;
+import me.anisjamadar.hotelbooking.dtos.RoomByIdDto;
 import me.anisjamadar.hotelbooking.dtos.RoomDto;
 import me.anisjamadar.hotelbooking.exceptions.RoomNotFoundException;
 import me.anisjamadar.hotelbooking.mappers.RoomMapper;
@@ -26,8 +27,8 @@ public class RoomService {
                 .toList();
     }
 
-    public RoomDto getRoomById(Long id) {
-        return roomMapper.toDto(
+    public RoomByIdDto getRoomById(Long id) {
+        return roomMapper.toRoomByIdDto(
                 roomRepository
                         .getRoomById(id)
                         .orElseThrow(RoomNotFoundException::new)

@@ -3,6 +3,7 @@ package me.anisjamadar.hotelbooking.controllers;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import me.anisjamadar.hotelbooking.dtos.AvailableRoomsRequest;
+import me.anisjamadar.hotelbooking.dtos.RoomByIdDto;
 import me.anisjamadar.hotelbooking.dtos.RoomsAvailableOnDateRequest;
 import me.anisjamadar.hotelbooking.dtos.RoomDto;
 import me.anisjamadar.hotelbooking.exceptions.RoomNotFoundException;
@@ -27,7 +28,7 @@ public class RoomController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<RoomDto> getRoomById(
+    public ResponseEntity<RoomByIdDto> getRoomById(
         @PathVariable Long id
     ) {
         return ResponseEntity.ok().body(roomService.getRoomById(id));
