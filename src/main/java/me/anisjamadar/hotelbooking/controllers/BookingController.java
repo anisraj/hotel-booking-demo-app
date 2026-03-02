@@ -5,8 +5,10 @@ import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import me.anisjamadar.hotelbooking.dtos.BookingDto;
 import me.anisjamadar.hotelbooking.dtos.BookingRequest;
-import me.anisjamadar.hotelbooking.exceptions.*;
-import me.anisjamadar.hotelbooking.repositories.BookingRepository;
+import me.anisjamadar.hotelbooking.exceptions.DateValidationException;
+import me.anisjamadar.hotelbooking.exceptions.RoomNotAvailableException;
+import me.anisjamadar.hotelbooking.exceptions.RoomNotFoundException;
+import me.anisjamadar.hotelbooking.exceptions.UserNotFoundException;
 import me.anisjamadar.hotelbooking.services.BookingService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +23,6 @@ import java.util.Map;
 @RequestMapping("/bookings")
 public class BookingController {
     private final BookingService bookingService;
-    private final BookingRepository bookingRepository;
 
     @PostMapping
     public ResponseEntity<BookingDto> createBooking(
@@ -40,7 +41,7 @@ public class BookingController {
         return ResponseEntity.ok(bookingService.getBookingsByUserId(userId));
     }
 
-    @PutMapping("/cancel/{bookingId}/")
+    @PutMapping("/{bookingId}/cancel")
     public ResponseEntity<BookingDto> cancelBooking(
         @PathVariable Long bookingId
     ) {
