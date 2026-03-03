@@ -1,4 +1,4 @@
-package me.anisjamadar.hotelbooking.dtos;
+package me.anisjamadar.hotelbooking.dtos.users;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

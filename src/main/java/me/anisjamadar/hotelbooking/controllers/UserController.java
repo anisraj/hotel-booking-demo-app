@@ -2,9 +2,9 @@ package me.anisjamadar.hotelbooking.controllers;
 
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
-import me.anisjamadar.hotelbooking.dtos.RegisterUserRequest;
-import me.anisjamadar.hotelbooking.dtos.UpdateUserRequest;
-import me.anisjamadar.hotelbooking.dtos.UserDto;
+import me.anisjamadar.hotelbooking.dtos.users.RegisterUserRequest;
+import me.anisjamadar.hotelbooking.dtos.users.UpdateUserRequest;
+import me.anisjamadar.hotelbooking.dtos.users.UserDto;
 import me.anisjamadar.hotelbooking.exceptions.EmailAlreadyRegisteredException;
 import me.anisjamadar.hotelbooking.exceptions.UserNotFoundException;
 import me.anisjamadar.hotelbooking.services.UserService;

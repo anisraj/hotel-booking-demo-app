@@ -1,9 +1,8 @@
-package me.anisjamadar.hotelbooking.dtos;
+package me.anisjamadar.hotelbooking.dtos.users;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
@@ -21,5 +20,5 @@ public class UserDto {
     @JsonFormat(pattern = "dd-MM-yyyy hh:mm:ss a")
     private LocalDateTime updatedAt;
 
-    private Set<BookingDto> bookings = new HashSet<>();
+    private Set<BookingDtoForUser> bookings = new HashSet<>();
 }

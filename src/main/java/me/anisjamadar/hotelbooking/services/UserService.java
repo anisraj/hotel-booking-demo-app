@@ -1,19 +1,17 @@
 package me.anisjamadar.hotelbooking.services;
 
 import lombok.AllArgsConstructor;
-import me.anisjamadar.hotelbooking.dtos.RegisterUserRequest;
-import me.anisjamadar.hotelbooking.dtos.UpdateUserRequest;
-import me.anisjamadar.hotelbooking.dtos.UserDto;
+import me.anisjamadar.hotelbooking.dtos.users.RegisterUserRequest;
+import me.anisjamadar.hotelbooking.dtos.users.UpdateUserRequest;
+import me.anisjamadar.hotelbooking.dtos.users.UserDto;
 import me.anisjamadar.hotelbooking.exceptions.EmailAlreadyRegisteredException;
 import me.anisjamadar.hotelbooking.exceptions.UserNotFoundException;
 import me.anisjamadar.hotelbooking.mappers.UserMapper;
 import me.anisjamadar.hotelbooking.repositories.UserRepository;
 import org.springframework.data.domain.Sort;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 @Service

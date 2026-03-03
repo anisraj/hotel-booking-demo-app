@@ -1,8 +1,8 @@
 package me.anisjamadar.hotelbooking.mappers;
 
 import me.anisjamadar.hotelbooking.domain.Room;
-import me.anisjamadar.hotelbooking.dtos.RoomByIdDto;
-import me.anisjamadar.hotelbooking.dtos.RoomDto;
+import me.anisjamadar.hotelbooking.dtos.rooms.RoomByIdDto;
+import me.anisjamadar.hotelbooking.dtos.rooms.RoomDto;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")

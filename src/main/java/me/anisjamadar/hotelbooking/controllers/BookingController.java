@@ -1,10 +1,9 @@
 package me.anisjamadar.hotelbooking.controllers;
 
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
-import me.anisjamadar.hotelbooking.dtos.BookingDto;
-import me.anisjamadar.hotelbooking.dtos.BookingRequest;
+import me.anisjamadar.hotelbooking.dtos.bookings.BookingDto;
+import me.anisjamadar.hotelbooking.dtos.bookings.BookingRequest;
 import me.anisjamadar.hotelbooking.exceptions.DateValidationException;
 import me.anisjamadar.hotelbooking.exceptions.RoomNotAvailableException;
 import me.anisjamadar.hotelbooking.exceptions.RoomNotFoundException;
@@ -13,7 +12,6 @@ import me.anisjamadar.hotelbooking.services.BookingService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.List;
 import java.util.Map;
@@ -26,17 +24,15 @@ public class BookingController {
 
     @PostMapping
     public ResponseEntity<BookingDto> createBooking(
-        @Valid @RequestBody BookingRequest bookingRequest,
-        UriComponentsBuilder uriComponentsBuilder
+        @Valid @RequestBody BookingRequest bookingRequest
     ) {
         var bookingDto = bookingService.createBooking(bookingRequest);
-        var uri = uriComponentsBuilder.path("/bookings/{id}").buildAndExpand(bookingDto.getId()).toUri();
-        return ResponseEntity.created(uri).body(bookingDto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(bookingDto);
     }
 
     @GetMapping("/user/{userId}")
     public ResponseEntity<List<BookingDto>> getBookingsByUser(
-        @NotNull @PathVariable Long userId
+        @PathVariable Long userId
     ) {
         return ResponseEntity.ok(bookingService.getBookingsByUserId(userId));
     }

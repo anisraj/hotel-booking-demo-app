@@ -1,4 +1,4 @@
-package me.anisjamadar.hotelbooking.dtos;
+package me.anisjamadar.hotelbooking.dtos.bookings;
 
 import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.FutureOrPresent;
