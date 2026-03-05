@@ -1,0 +1,52 @@
+package me.anisjamadar.hotelbooking.services;
+
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.JwtException;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.security.Keys;
+import lombok.AllArgsConstructor;
+import me.anisjamadar.hotelbooking.config.JwtConfig;
+import me.anisjamadar.hotelbooking.domain.User;
+import org.springframework.stereotype.Service;
+
+import java.util.Date;
+
+@AllArgsConstructor
+@Service
+public class JwtService {
+    private final JwtConfig jwtConfig;
+
+    public String generateToken(User user) {
+        final long tokenExpiration = 86400; //1day
+        return Jwts.builder()
+                .subject(user.getId().toString())
+                .claim("email", user.getEmail())
+                .claim("name", user.getName())
+                .issuedAt(new Date())
+                .expiration(new Date(System.currentTimeMillis() + 1000 * tokenExpiration))
+                .signWith(Keys.hmacShaKeyFor(jwtConfig.getSecret().getBytes()))
+                .compact();
+
+    }
+
+    public boolean validateToken(String token) {
+        try {
+            var claims = getClaims(token);
+            return claims.getExpiration().after(new Date());
+        } catch (JwtException e) {
+            return false;
+        }
+    }
+
+    private Claims getClaims(String token) {
+        return Jwts.parser()
+                .verifyWith(jwtConfig.getSecretKey())
+                .build()
+                .parseSignedClaims(token)
+                .getPayload();
+    }
+
+    public Long getUserIdFromToken(String token) {
+        return Long.valueOf(getClaims(token).getSubject());
+    }
+}
