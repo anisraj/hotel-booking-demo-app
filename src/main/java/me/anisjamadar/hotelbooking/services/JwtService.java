@@ -16,17 +16,27 @@ import java.util.Date;
 public class JwtService {
     private final JwtConfig jwtConfig;
 
-    public String generateToken(User user) {
-        final long tokenExpiration = 86400; //1day
+    public String generateAccessToken(User user) {
+        final long EXPIRATION_TIME = jwtConfig.getAccessTokenExpiration();
+
+        return generateToken(user, EXPIRATION_TIME);
+    }
+
+    public String generateRefreshToken(User user) {
+        final long EXPIRATION_TIME = jwtConfig.getRefreshTokenExpiration();
+
+        return generateToken(user, EXPIRATION_TIME);
+    }
+
+    public String generateToken(User user, long EXPIRATION_TIME) {
         return Jwts.builder()
                 .subject(user.getId().toString())
                 .claim("email", user.getEmail())
                 .claim("name", user.getName())
                 .issuedAt(new Date())
-                .expiration(new Date(System.currentTimeMillis() + 1000 * tokenExpiration))
+                .expiration(new Date(System.currentTimeMillis() + 1000 * EXPIRATION_TIME))
                 .signWith(Keys.hmacShaKeyFor(jwtConfig.getSecret().getBytes()))
                 .compact();
-
     }
 
     public boolean validateToken(String token) {
